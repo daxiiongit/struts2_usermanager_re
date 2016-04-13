@@ -17,4 +17,9 @@ public class UserBizImpl implements UserBiz{
 		return userDao.getAllUser();
 	}
 
+	@Override
+	public int addUser(User u) {
+		return userDao.addUser(u);
+	}
+
 }

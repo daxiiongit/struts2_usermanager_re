@@ -36,5 +36,27 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		list = userBiz.getAllUser();
 		return "list-success";
 	}
+	
+	// 配置添加页面性别
+	private String[] sexs = new String[]{"男","女"};
+	
+	public String[] getSexs() {
+		return sexs;
+	}
+
+	public void setSexs(String[] sexs) {
+		this.sexs = sexs;
+	}
+
+	public String toAdd(){
+		return "toAdd-success";
+	}
+	
+	// 添加用户
+	public String add(){
+		UserBiz userBiz = new UserBizImpl();
+		userBiz.addUser(user);
+		return this.list();    // 调用list()方法将数据显示出来
+	}
 
 }

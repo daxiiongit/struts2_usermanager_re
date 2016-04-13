@@ -24,7 +24,7 @@
 		<h3><font color="blue">用户信息列表</font></h3>
 		<table width="620">
 			<tr>
-				<td align="right">添加用户</td>
+				<td align="right"><a href="user-toAdd">添加用户</a></td>
 			</tr>
 		</table>
 		

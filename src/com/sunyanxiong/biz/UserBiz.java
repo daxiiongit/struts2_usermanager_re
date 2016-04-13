@@ -7,5 +7,6 @@ import com.sunyanxiong.entities.User;
 public interface UserBiz {
 
 	public List<User> getAllUser();
+	public int addUser(User u);
 	
 }

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.opensymphony.xwork2.Result;
 import com.sunyanxiong.dao.BaseDao;
 import com.sunyanxiong.dao.UserDao;
 import com.sunyanxiong.entities.User;
@@ -49,6 +50,44 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 			this.closeAll(con, pstmt, rs);
 		}
 		return list;
+	}
+
+	@Override
+	public int addUser(User u) {
+		int result = 0;
+		String sql = "insert into userinfo(name,sex,age,telephone,email,specialty,school,address) values(?,?,?,?,?,?,?,?)";
+		result = saveOrUpdate(u, sql);
+		return result;
+	}
+	
+	public int saveOrUpdate(User u,String sql){
+		int result = 0;
+		try {
+			con = this.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			// pstmt预编译处理
+			pstmt.setString(1, u.getName());
+			pstmt.setString(2, u.getSex());
+			pstmt.setInt(3, u.getAge());
+			pstmt.setString(4, u.getTelephone());
+			pstmt.setString(5, u.getEmail());
+			pstmt.setString(6, u.getSpecialty());
+			pstmt.setString(7, u.getSchool());
+			pstmt.setString(8, u.getAddredd());
+			
+			// 添加数据到数据库
+			result = pstmt.executeUpdate();
+			if(result != 0){
+				System.out.println("提交成功");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			this.closeAll(con, pstmt, rs);
+		}
+		return result;
 	}
 
 }

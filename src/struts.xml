@@ -5,4 +5,10 @@
 
 <struts>
 
+	<package name="user" extends="struts-default">
+		<action name="user-*" class="com.sunyanxiong.action.UserAction" method="{1}">
+			<result name="{1}-success">/WEB-INF/pages/user-{1}.jsp</result>
+		</action>
+	</package>
+
 </struts>

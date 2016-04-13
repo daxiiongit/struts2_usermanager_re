@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.opensymphony.xwork2.Result;
 import com.sunyanxiong.dao.BaseDao;
 import com.sunyanxiong.dao.UserDao;
 import com.sunyanxiong.entities.User;
@@ -87,6 +86,28 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 		}finally {
 			this.closeAll(con, pstmt, rs);
 		}
+		return result;
+	}
+
+	// 删除用户
+	@Override
+	public int deleteUser(int id) {
+		int result = 0;
+		String sql = "delete from userinfo where id=?";
+		try {
+			con = this.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			result = pstmt.executeUpdate();
+			if(result != 0){
+				System.out.println("删除成功！");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			this.closeAll(con, pstmt, rs);
+		}
+		
 		return result;
 	}
 

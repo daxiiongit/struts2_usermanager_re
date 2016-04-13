@@ -58,5 +58,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		userBiz.addUser(user);
 		return this.list();    // 调用list()方法将数据显示出来
 	}
+	
+	// 删除用户
+	public String delete(){
+		UserBiz userBiz = new UserBizImpl();
+		userBiz.deleteUser(user.getId());
+		return this.list();
+	}
 
 }

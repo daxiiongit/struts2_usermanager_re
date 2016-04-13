@@ -10,5 +10,7 @@ public interface UserDao {
 	public List<User> getAllUser();
 	// 添加用户
 	public int addUser(User u);
+	// 删除用户
+	public int deleteUser(int id);
 	
 }

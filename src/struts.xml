@@ -11,7 +11,7 @@
 		</action>
 		
 		<!-- 特殊功能配置请求 -->
-		<action name="user-add" class="com.sunyanxiong.action.UserAction" method="add">
+		<action name="*-user" class="com.sunyanxiong.action.UserAction" method="{1}">
 			<result name="list-success">/WEB-INF/pages/user-list.jsp</result>
 		</action>
 	</package>

@@ -12,7 +12,7 @@
 
 	<div align="center">
 		<h3><font color="blue">添加用户</font></h3>
-		<s:form action="user-add" method="post">
+		<s:form action="add-user" method="post">
 			<table width="300" border="1" bordercolor="#99CCFF" bgcolor="#FFFFEE">
 				<s:hidden name="id"></s:hidden>
 				<s:textfield name="name" label="姓名"></s:textfield>

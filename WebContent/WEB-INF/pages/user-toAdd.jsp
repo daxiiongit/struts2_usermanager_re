@@ -23,7 +23,7 @@
 				修改用户
 			</s:else>
 		</font></h3>
-		<s:form action="add-user" method="post">
+		<s:form action="saveOrUpdate-user" method="post">
 			<table width="300" border="1" bordercolor="#99CCFF" bgcolor="#FFFFEE">
 				<s:hidden name="user.id"></s:hidden>
 				<s:textfield name="user.name" label="姓名"></s:textfield>

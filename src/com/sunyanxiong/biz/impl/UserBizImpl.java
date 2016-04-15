@@ -18,8 +18,8 @@ public class UserBizImpl implements UserBiz{
 	}
 
 	@Override
-	public int addUser(User u) {
-		return userDao.addUser(u);
+	public int saveOrUpdate(User u) {
+		return userDao.saveOrUpdate(u);
 	}
 
 	@Override

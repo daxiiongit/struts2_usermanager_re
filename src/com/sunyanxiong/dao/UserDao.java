@@ -9,7 +9,7 @@ public interface UserDao {
 	// 获取所有用户
 	public List<User> getAllUser();
 	// 添加用户
-	public int addUser(User u);
+	public int saveOrUpdate(User u);
 	// 删除用户
 	public int deleteUser(int id);
 	// 修改用户

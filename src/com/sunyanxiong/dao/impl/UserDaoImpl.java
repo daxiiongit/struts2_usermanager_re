@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import com.sunyanxiong.dao.BaseDao;
 import com.sunyanxiong.dao.UserDao;
 import com.sunyanxiong.entities.User;
@@ -52,14 +53,39 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 	}
 
 	@Override
-	public int addUser(User u) {
+	public int saveOrUpdate(User u) {
 		int result = 0;
-		String sql = "insert into userinfo(name,sex,age,telephone,email,specialty,school,address) values(?,?,?,?,?,?,?,?)";
-		result = saveOrUpdate(u, sql);
+		String sql_id = "select id from userinfo where id =" + u.getId();
+		String sql_save = "insert into userinfo(name,sex,age,telephone,email,specialty,school,address) values(?,?,?,?,?,?,?,?)";
+		String sql_update = "update userinfo set name=?,sex=?,age=?,telephone=?,email=?,specialty=?,school=?,address=? where id=" + u.getId();
+		
+		try {
+			con = this.getConnection();
+			pstmt = con.prepareStatement(sql_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()){   
+				if((rs.getInt("id")) == u.getId()){  // 数据库中存在记录
+					// 执行更新操作
+					result = query_getId(u, sql_update);
+				}
+			}else{
+				if(u.getId() == 0){
+					// 执行新增操作
+					result = query_getId(u, sql_save);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			this.closeAll(con, pstmt, rs);
+		}
+		
 		return result;
 	}
 	
-	public int saveOrUpdate(User u,String sql){
+	public int query_getId(User u,String sql){
+		
 		int result = 0;
 		try {
 			con = this.getConnection();
@@ -89,6 +115,37 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 		}
 		return result;
 	}
+	
+	/*public int saveOrUpdate(User u,String sql){
+		int result = 0;
+		try {
+			con = this.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			// pstmt预编译处理
+			pstmt.setString(1, u.getName());
+			pstmt.setString(2, u.getSex());
+			pstmt.setInt(3, u.getAge());
+			pstmt.setString(4, u.getTelephone());
+			pstmt.setString(5, u.getEmail());
+			pstmt.setString(6, u.getSpecialty());
+			pstmt.setString(7, u.getSchool());
+			pstmt.setString(8, u.getAddress());
+			
+			System.out.println(u.getName());
+			// 添加数据到数据库
+			result = pstmt.executeUpdate();
+			if(result != 0){
+				System.out.println("提交成功");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			this.closeAll(con, pstmt, rs);
+		}
+		return result;
+	}*/
 
 	// 删除用户
 	@Override

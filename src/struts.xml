@@ -19,7 +19,6 @@
 		</action>
 		
 		<action name="toupdate-user" class="com.sunyanxiong.action.UserAction" method="toupdate">
-			<!-- <result name="toupdate-success">/WEB-INF/pages/update-user.jsp</result> -->
 			<result name="toupdate-success">/WEB-INF/pages/user-toAdd.jsp</result>
 		</action>
 		

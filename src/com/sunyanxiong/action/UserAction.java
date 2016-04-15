@@ -55,10 +55,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		return "toAdd-success";
 	}
 	
-	// 添加用户
-	public String add(){
+	// 添加用户或者更新用户
+	public String saveOrUpdate(){
 		UserBiz userBiz = new UserBizImpl();
-		userBiz.addUser(user);
+		userBiz.saveOrUpdate(user);
 		return this.list();    // 调用list()方法将数据显示出来
 	}
 	

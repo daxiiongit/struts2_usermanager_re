@@ -12,8 +12,17 @@
 		
 		<!-- 特殊功能配置请求 -->
 		<action name="*-user" class="com.sunyanxiong.action.UserAction" method="{1}">
+			<!-- 删除 -->
 			<result name="list-success">/WEB-INF/pages/user-list.jsp</result>
+			<!-- 更新 -->
+			<!-- <result name="toAdd-success">/WEB-INF/pages/user-toAdd.jsp</result> -->
 		</action>
+		
+		<action name="toupdate-user" class="com.sunyanxiong.action.UserAction" method="toupdate">
+			<!-- <result name="toupdate-success">/WEB-INF/pages/update-user.jsp</result> -->
+			<result name="toupdate-success">/WEB-INF/pages/user-toAdd.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>

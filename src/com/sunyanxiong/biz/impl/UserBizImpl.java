@@ -27,4 +27,14 @@ public class UserBizImpl implements UserBiz{
 		return userDao.deleteUser(id);
 	}
 
+	@Override
+	public User getUserById(int id) {
+		return userDao.getUserById(id);
+	}
+
+	/*@Override
+	public int updateUser(User u) {
+		return userDao.updateUser(u);
+	}*/
+
 }

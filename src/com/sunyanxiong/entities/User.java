@@ -11,7 +11,7 @@ public class User {
 	private String email;
 	private String specialty;
 	private String school;
-	private String addredd;
+	private String address;
 
 	public int getId() {
 		return id;
@@ -45,8 +45,8 @@ public class User {
 		return school;
 	}
 
-	public String getAddredd() {
-		return addredd;
+	public String getAddress() {
+		return address;
 	}
 
 	public void setId(int id) {
@@ -81,8 +81,8 @@ public class User {
 		this.school = school;
 	}
 
-	public void setAddredd(String addredd) {
-		this.addredd = addredd;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

@@ -9,13 +9,21 @@ import com.sunyanxiong.biz.impl.UserBizImpl;
 import com.sunyanxiong.entities.User;
 
 // 用户Action
-public class UserAction extends ActionSupport implements ModelDriven<User> {
+public class UserAction extends ActionSupport implements ModelDriven<User>{
 
 	private static final long serialVersionUID = 1L;
 
 	// ModelDriven需要先创建一个User对象
-	private User user = new User();   
-	
+	private User user = new User(); 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	private List<User> list;
 
 	public List<User> getList() {
@@ -26,11 +34,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		this.list = list;
 	}
 
-	@Override
-	public User getModel() {
-		return this.user;
-	}
-	
 	public String list(){
 		UserBiz userBiz = new UserBizImpl();
 		list = userBiz.getAllUser();
@@ -65,5 +68,30 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		userBiz.deleteUser(user.getId());
 		return this.list();
 	}
+	
+	/*// 修改用户
+	public String update(){
+		UserBiz userBiz = new UserBizImpl();
+		userBiz.updateUser(user);
+		
+		return "update";
+		
+	}*/
+	
+	   // 修改用户信息的回显逻辑
+		public String toupdate(){
+			UserBiz userBiz = new UserBizImpl();
+			user = userBiz.getUserById(user.getId());
+			System.out.println(user.getAddress()+user.getName());
+			return "toupdate-success";
+		}
 
+		
+		// 重点：调用getUser()将数据回显到页面，如果只调用this.user,数据将不会回显
+		@Override
+		public User getModel() {
+			return this.getUser();
+		}
+
+		
 }

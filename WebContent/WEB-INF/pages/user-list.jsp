@@ -35,6 +35,7 @@
 				<td>年龄</td>
 				<td>电话</td>
 				<td>学校</td>
+				<td>修改</td>
 				<td>删除</td>
 			</tr>
 			
@@ -46,6 +47,9 @@
 					<td><s:property value="age"/></td>
 					<td><s:property value="telephone"/></td>
 					<td><s:property value="school"/></td>
+					<td>
+						<a href="toupdate-user?id=<s:property value='id'/>">修改</a>
+					</td>
 					<td>
 						<a href="delete-user?id=<s:property value='id'/>" onclick="if(confirm('确定删除用户吗?')==false) return false">删除</a>
 					</td>

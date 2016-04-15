@@ -38,7 +38,7 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 				u.setEmail(rs.getString("email"));
 				u.setSpecialty(rs.getString("specialty"));
 				u.setSchool(rs.getString("school"));
-				u.setAddredd(rs.getString("address"));
+				u.setAddress(rs.getString("address"));
 				
 				// 将属性值添加到list集合中
 				list.add(u);
@@ -73,8 +73,9 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 			pstmt.setString(5, u.getEmail());
 			pstmt.setString(6, u.getSpecialty());
 			pstmt.setString(7, u.getSchool());
-			pstmt.setString(8, u.getAddredd());
+			pstmt.setString(8, u.getAddress());
 			
+			System.out.println(u.getName());
 			// 添加数据到数据库
 			result = pstmt.executeUpdate();
 			if(result != 0){
@@ -111,4 +112,66 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 		return result;
 	}
 
+	/*public User queryOrUpdate(User us,String sql){
+		try {
+			con = this.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				us.setId(rs.getInt("id"));   // 将数据库中的数据放到对应的字段属性中
+				us.setName(rs.getString("name"));
+				us.setSex(rs.getString("sex"));
+				us.setAge(rs.getInt("age"));
+				us.setTelephone(rs.getString("telephone"));
+				us.setEmail(rs.getString("email"));
+				us.setSpecialty(rs.getString("specialty"));
+				us.setSchool(rs.getString("school"));
+				us.setAddredd(rs.getString("address"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			this.closeAll(con, pstmt, rs);
+		}
+		return us;
+	}*/
+	
+/*	// 修改数据
+	@Override
+	public int updateUser(User u) {
+		int result = 0;
+		System.out.println(u.getId());
+		String sql = "update userinfo set name=?,sex=?,age=?,telephone=?,email=?,specialty=?,school=?,address=? where id=" + u.getId();
+		result = saveOrUpdate(u, sql);
+		return result;
+	}*/
+
+	@Override
+	public User getUserById(int id) {
+		User u = null;
+		String sql = "select * from userinfo where id=" + id;
+		try {
+			con = this.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			u = new User();
+			if(rs.next()){
+				u.setId(rs.getInt("id"));    // 将当前记录的id放到修改域中
+				u.setName(rs.getString("name"));
+				u.setSex(rs.getString("sex"));
+				u.setAge(rs.getInt("age"));
+				u.setTelephone(rs.getString("telephone"));
+				u.setEmail(rs.getString("email"));
+				u.setSpecialty(rs.getString("specialty"));
+				u.setSchool(rs.getString("school"));
+				u.setAddress(rs.getString("address"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			this.closeAll(con, pstmt, rs);
+		}
+		return u;
+	}
 }
